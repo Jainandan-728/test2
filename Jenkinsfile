@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "my-python-app"
+        DOCKER_IMAGE = "image-pqr"
         DOCKER_TAG   = "latest"
     }
 
@@ -36,11 +36,11 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 sh """
-                docker stop myapp-container || true
-                docker rm myapp-container || true
+                docker stop image-pqr || true
+                docker rm image-pqr || true
 
                 docker run -d -p 5000:5000 \
-                --name myapp-container \
+                --name image-pqr \
                 ${DOCKER_IMAGE}:${DOCKER_TAG}
                 """
             }
